@@ -1,10 +1,6 @@
 const elements = {
-    iframe: document.getElementById("game"),
+    gameFrame: document.getElementById("gameFrame"),
 }
-
-const rooms = [
-    "welcome"
-];
 
 const tips = [
     "a² + b² = c²... Warte, wie war das nochmal mit Deutsch?",
@@ -14,33 +10,49 @@ const tips = [
     "@todo: Ein gutes Spiel programmieren!"
 ];
 
+const engine = {
+    messageChannel: document.getElementById("gameFrame").contentWindow,
+    health: 5,
+    difficulty: "easy",
+    ready: (data) => {
+        loading_screen.hide();
+    },
+    load: (data) => {
+        loading_screen.show();
+        window.setTimeout(() => {
+            elements.gameFrame.src = `rooms/${data.room}/index.html`;
+        }, 1000);
+    },
+    setValues: (data) => {
+        if (data.health) health_display.update(data.health);
+        if (data.max_health) health_display.setMax(data.max_health);
+        if (data.difficulty) engine.difficulty = data.difficulty;
+    },
+};
+
 window.onmessage = (e) => {
     // Check if is json object
     if (!e.data || typeof e.data !== "object") return;
-    // Switch through type
-    msg = e.data;
-    switch (msg.type) {
-        case "init":
-            // Initialize the game
-            console.log("Initializing game");
-            break;
-        case "load":
-            // Load a room
-            if (rooms.includes(msg.room)) {
-                console.log("Loading room: " + msg.room);
-                // Load room
-                document.getElementById("game").src = "rooms/" + msg.room + ".html";
-            } else {
-                console.error("Room not found: " + msg.room);
-            }
-            break;
-        case "error":
-            // Error message
-            console.error(msg.message);
-            break;
-        default:
-            console.log("Unknown message type: ", msg);
-            break;
+    // Run action
+    engine[e.data.type](e.data);
+};
+
+// 
+// Health display
+// 
+const health_display = {
+    health: 5,
+    max_health: 5,
+    elements: {
+        healthText: document.getElementById("health-text"),
+    },
+    update: (health) => {
+        health_display.health = health;
+        health_display.elements.healthText.innerText = `${health_display.health} / ${health_display.max_health}`;
+    },
+    setMax: (max) => {
+        health_display.max_health = max;
+        health_display.update(health_display.health);
     }
 };
 
@@ -120,4 +132,3 @@ const loading_screen = {
     }
 };
 window.setInterval(loading_screen.changeMSG, 10000 + 6000);
-window.addEventListener("load", loading_screen.hide);

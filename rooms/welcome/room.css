@@ -7,3 +7,27 @@ h1 {
     margin-top: 25dvh;
     font-size: 5rem;
 }
+
+.buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    padding-top: 5dvh;
+}
+
+.startEasy {
+    display: grid;
+    place-content: end;
+}
+
+.schoolNote {
+    font-size: 1.25rem;
+    font-weight: lighter;
+    text-align: center;
+    margin-top: 5rem;
+}
+
+a {
+    color: white;
+    text-decoration: underline dashed;
+}

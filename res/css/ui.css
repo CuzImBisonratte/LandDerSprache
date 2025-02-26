@@ -1,0 +1,14 @@
+button {
+    font-family: "Fredericka the Great";
+    font-size: 1.5rem;
+    padding: 0.5rem 1rem;
+    border: 2px dotted #888;
+    background-color: #000;
+    color: #fff;
+    cursor: pointer;
+    transition: border 0.3s;
+}
+
+button:hover {
+    border: 2px solid #fff;
+}

@@ -5,11 +5,20 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="stylesheet" href="/res/fonts/include.css" />
 		<link rel="stylesheet" href="/res/css/base.css" />
+		<link rel="stylesheet" href="/res/css/ui.css" />
 		<link rel="stylesheet" href="./room.css" />
 	</head>
 	<body>
 		<h1>Land der Sprache</h1>
-		<button></button>
+		<div class="buttons">
+			<div class="startEasy">
+				<button onclick="room.start('easy')">Start - Einfach</button>
+			</div>
+			<div class="startHard">
+				<button onclick="room.start('hard')">Start - Schwer</button>
+			</div>
+		</div>
+		<div class="schoolNote">Ein Projekt an der <a href="https://lls-bad.de" target="_blank" rel="noopener noreferrer" title="Louis-Lepoix-Schule Baden-Baden">Louis-Lepoix-Schule Baden-Baden</a></div>
 		<script src="./room.js"></script>
 	</body>
 </html>
