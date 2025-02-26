@@ -1,0 +1,75 @@
+html,
+body {
+    cursor: pointer;
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    overflow: scroll !important;
+    scroll-behavior: smooth;
+}
+
+.text-tiles {
+    text-align: center;
+    max-width: 50rem;
+    margin: auto;
+    overflow: auto;
+}
+
+.text-tile {
+    font-size: 2rem;
+    margin: 2rem;
+    transition: 1s filter;
+    animation: newTextTile 1s ease forwards;
+    color: #fff;
+}
+
+.text-tile:not(#active) {
+    filter: opacity(0.5);
+}
+
+.text-tile-continue {
+    font-size: 1.5rem;
+    background-color: #fefefe;
+    color: #000;
+    filter: opacity(1) !important;
+    font-weight: bold;
+    padding: 2rem;
+    border-radius: 1rem;
+}
+
+.fancy {
+    background: linear-gradient(124deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3);
+    background-size: 1800% 1800%;
+    animation: fancyText 18s ease infinite;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+@keyframes fancyText {
+    0% {
+        background-position: 0% 82%
+    }
+
+    50% {
+        background-position: 100% 19%
+    }
+
+    100% {
+        background-position: 0% 82%
+    }
+}
+
+@keyframes newTextTile {
+    0% {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
