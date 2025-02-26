@@ -22,6 +22,7 @@ const engine = {
         window.setTimeout(() => {
             elements.gameFrame.src = `rooms/${data.room}/index.html`;
         }, 1000);
+        window.history.pushState(null, null, "/?l=" + data.room);
     },
     setValues: (data) => {
         if (data.health) health_display.update(data.health);
@@ -64,6 +65,7 @@ const loading_screen = {
         screen: document.getElementById("loading-screen"),
         message: document.getElementById("loading-message"),
     },
+    lastClosed: 0,
     show: () => {
         loading_screen.elements.screen.animate([
             {
@@ -76,25 +78,28 @@ const loading_screen = {
             }
         ], {
             duration: 1000,
-            easing: "cubic-bezier(.52,0,0,1)",
+            easing: "cubic-bezier(.5,0,0,1)",
             fill: "forwards"
         });
+        loading_screen.lastClosed = Date.now();
     },
     hide: () => {
-        loading_screen.elements.screen.animate([
-            {
-                opacity: 1,
-                transform: "translateY(0)"
-            },
-            {
-                opacity: 0.95,
-                transform: "translateY(-100vh)"
-            }
-        ], {
-            duration: 1000,
-            easing: "cubic-bezier(.52,0,0,1)",
-            fill: "forwards"
-        });
+        window.setTimeout(() => {
+            loading_screen.elements.screen.animate([
+                {
+                    opacity: 1,
+                    transform: "translateY(0)"
+                },
+                {
+                    opacity: 0.95,
+                    transform: "translateY(-100vh)"
+                }
+            ], {
+                duration: 1000,
+                easing: "cubic-bezier(.5,0,0,1)",
+                fill: "forwards"
+            });
+        }, Math.max(0, 2500 - (Date.now() - loading_screen.lastClosed)));
     },
     hideMSG: () => {
         return new Promise((resolve, reject) => {
@@ -132,3 +137,7 @@ const loading_screen = {
     }
 };
 window.setInterval(loading_screen.changeMSG, 10000 + 6000);
+
+// Check for l parameter (location - load that room)
+if ((new URLSearchParams(window.location.search)).get("l"))
+    engine.load({ room: (new URLSearchParams(window.location.search)).get("l") });
