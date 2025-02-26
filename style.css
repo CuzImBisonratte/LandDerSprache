@@ -36,7 +36,7 @@ iframe {
 .loader-spinner {
     grid-area: loader-spinner;
     display: flex;
-    place-content: end;
+    place-content: center end;
 }
 
 .loader-title {
@@ -47,14 +47,22 @@ iframe {
 
 #dots circle {
     opacity: 0;
-    animation: dotanimation 6s infinite;
+    animation: dotanimation 5s infinite;
 }
 
 #dots #dot2 {
-    animation-delay: 2s;
+    animation-delay: 1s;
 }
 
 #dots #dot3 {
+    animation-delay: 2s;
+}
+
+#dots #dot4 {
+    animation-delay: 3s;
+}
+
+#dots #dot5 {
     animation-delay: 4s;
 }
 
@@ -67,7 +75,7 @@ iframe {
         opacity: 1;
     }
 
-    80% {
+    70% {
         opacity: 0;
     }
 
