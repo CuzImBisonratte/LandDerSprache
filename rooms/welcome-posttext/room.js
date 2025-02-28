@@ -47,6 +47,7 @@ const room = {
                     type: "load",
                     room: "tal-der-metaphern",
                 });
+                return;
             }
             room.clickToContinue = true;
             let continueElement = document.createElement("div");
